@@ -1,0 +1,41 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'timeConversion' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts STRING s as parameter.
+#
+
+def timeConversion(s):
+    time = re.split('[a-zA-Z]', s)[0]
+    tod = re.findall('[a-zA-Z]+', s)[0]
+    print(tod)
+    
+    if tod == 'AM':
+        if int(re.split('[:]', s)[0]) == 12:
+            return '00'+':'+re.split('[:]', s)[1]+':'+re.split('[:a-zA-Z]', s)[2]
+        else:
+            return re.split('[a-zA-Z]', s)[0]
+    else:
+        if int(re.split('[:]', s)[0]) < 12:
+            return (str(int(re.split('[:]', s)[0])+12)+ ':'+re.split('[:]', s)[1]+':'+re.split('[:a-zA-Z]', s)[2])
+        else:
+            return re.split('[a-zA-Z]', s)[0]
+            
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    result = timeConversion(s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
